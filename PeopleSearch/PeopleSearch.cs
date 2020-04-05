@@ -11,16 +11,16 @@ namespace PeopleSearch
 {
     public class PeopleSearch
     {
-        public static string name;
-        public static string address;
-        public static int age;
-        public static string[] interests;
+        private static string name;
+        private static string address;
+        private static int age;
+        private static string[] interests;
 
         /// <summary>
         /// Gets the name of the Person
         /// </summary>
         /// <returns> name as a string </returns>
-        public static string GetName()
+        private static string GetName()
         {
             Console.WriteLine("\nEnter full name: ");
             name = Console.ReadLine();
@@ -33,7 +33,7 @@ namespace PeopleSearch
         /// Gets the address of the person
         /// </summary>
         /// <returns> address as a string </returns>
-        public static string GetAddress()
+        private static string GetAddress()
         {
             Console.WriteLine("\nEnter address: ");
             address = Console.ReadLine();
@@ -45,7 +45,7 @@ namespace PeopleSearch
         /// Gets the age of the person
         /// </summary>
         /// <returns> name as an int </returns>
-        public static int GetAge()
+        private static int GetAge()
         {
             Console.WriteLine("\nEnter age: ");
             string ageAsString = Console.ReadLine();
@@ -62,7 +62,7 @@ namespace PeopleSearch
         /// Gets all interests of the person
         /// </summary>
         /// <returns> interests as string array </returns>
-        public static string[] GetInterests()
+        private static string[] GetInterests()
         {
             Console.WriteLine("\nEnter {0}'s interests separated by a comma (must enter at least one interest)", name);
             string allInterests = Console.ReadLine();
@@ -85,7 +85,7 @@ namespace PeopleSearch
         /// <summary>
         /// Gets name, address, age, and interests of a person
         /// </summary>
-        public static void GetPersonInfo()
+        private static void GetPersonInfo()
         {
             Console.WriteLine("To add a new person enter their information below");
             string name = GetName();
@@ -99,7 +99,7 @@ namespace PeopleSearch
         /// returned to the user.
         /// </summary>
         /// <param name="dictionaryOfPerson"> dictionary to search keys </param>
-        static void PersonSearch(Dictionary<string, Person> dictionaryOfPerson)
+        private static void PersonSearch(Dictionary<string, Person> dictionaryOfPerson)
         {
             Console.WriteLine("Enter name to search for: ");
             string nameToSearch = Console.ReadLine();
@@ -123,7 +123,7 @@ namespace PeopleSearch
         /// </summary>
         /// <param name="str"> string to format with TitleCase </param>
         /// <returns> name in TitleCase </returns>
-        public static string ToTitleCase(string str)
+        private static string ToTitleCase(string str)
         {
             string nameWithTitleCase = str;
             if (!string.IsNullOrEmpty(str))
@@ -148,7 +148,7 @@ namespace PeopleSearch
         /// <summary>
         /// Prints three lines to the console asking to search for a person, add a person or exit the program
         /// </summary>
-        public static string SearchOrAddPerson()
+        private static string SearchOrAddPerson()
         {
             Console.WriteLine("Press 1 to search for a person");
             Console.WriteLine("Press 2 to add a new person");
@@ -172,6 +172,10 @@ namespace PeopleSearch
                         continue;
                     // search for a person
                     case "1":
+                        if (dictionaryOfPerson.Keys.Count == 0)
+                        {
+                            Console.WriteLine("There are no people to search for, please add a person.");
+                        }
                         PersonSearch(dictionaryOfPerson);
                         // change decision to "0" to call SearchOrAddPerson()
                         userDecision = "0";
